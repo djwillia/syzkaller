@@ -278,6 +278,7 @@ func ParseEnabledSyscalls(target *prog.Target, enabled, disabled []string) (map[
 		}
 	} else {
 		for _, call := range target.Syscalls {
+			//fmt.Printf("%s\n", call.Name);
 			syscalls[call.ID] = true
 		}
 	}
