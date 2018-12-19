@@ -233,12 +233,13 @@ func RunManager(cfg *mgrconfig.Config, target *prog.Target, sysTarget *targets.T
 			executed := mgr.stats.execTotal.get()
 			crashes := mgr.stats.crashes.get()
 			signal := mgr.corpusSignal.Len()
+			corpuslen := len(mgr.corpus)
 			mgr.mu.Unlock()
 			numReproducing := atomic.LoadUint32(&mgr.numReproducing)
 			numFuzzing := atomic.LoadUint32(&mgr.numFuzzing)
 
-			log.Logf(0, "VMs %v, executed %v, cover %v, crashes %v, repro %v",
-				numFuzzing, executed, signal, crashes, numReproducing)
+			log.Logf(0, "VMs %v, executed %v, cover %v, corpus %v, crashes %v, repro %v",
+				numFuzzing, executed, signal, corpuslen, crashes, numReproducing)
 		}
 	}()
 
